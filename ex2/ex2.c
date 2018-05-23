@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
     // printf("hello world (pid: %d)\n", (int)getpid());
     FILE *file;
 
-    file = fopen("file.txt", "w+"); // w+ allows to read and write from the file
+    file = fopen("text.txt", "w+"); // w+ allows to read and write from the file
     fprintf(file, "%s %s %s %d", "We", "are", "in", 2018);
 
     int rc = fork();
@@ -31,5 +31,7 @@ int main(int argc, char *argv[])
         printf("hello, parent here (pid: %d) of child %d\n", (int)getpid(), rc);
         printf("file discriptor: %d\n", file);
     }
+
+    fclose(file);
     return 0;
 }
