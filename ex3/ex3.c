@@ -6,9 +6,30 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
-    // Your code here
+    // printf("hello world (pid: %d)\n", (int)getpid());
+
+    int rc = fork();
+
+    // negative number indicates failure
+    if (rc < 0)
+    {
+        printf("fork failed\n");
+        exit(1);
+    }
+    // zero indicates child has been fork();
+    else if (rc == 0)
+    {
+        printf("hello\n");
+    }
+    // greater than 0 = parent
+    else
+    {
+        // waitpid() needs to go here
+        int wc = waitpid(rc, NULL, 0);
+        printf("goodbye\n");
+    }
 
     return 0;
 }
