@@ -21,7 +21,16 @@ and `clock_gettime()` should work just fine.
 
 int main()
 {
-    // Your code here
-    
+    int diff;
+    struct timespec start, end;
+
+    // start time
+    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &start);
+    //end time
+    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &end);
+
+    diff = BILLION * (end.tv_sec - start.tv_sec) + end.tv_nsec - start.tv_nsec;
+    printf("system call time = %u nanoseconds\n", diff);
+
     return 0;
 }
